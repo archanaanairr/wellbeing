@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css';  // Corrected to match the file name
+import AssessmentHeading from './components/AssessmentHeading';
+import Questionnaire from './components/Questionnaire';
+import Recommendations from './components/Recommendations';
 
-function App() {
+const App = () => {
+  const [score, setScore] = useState(null);
+
+  const handleScoreUpdate = (calculatedScore) => {
+    setScore(calculatedScore);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AssessmentHeading />
+      <Questionnaire onScoreUpdate={handleScoreUpdate} />
+      {score !== null && <Recommendations score={score} />}
     </div>
   );
-}
+};
 
 export default App;
+
+
+
